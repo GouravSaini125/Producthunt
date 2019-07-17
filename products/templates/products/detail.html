@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block content %}
+
+<br>
+<br>
+<div class='row'>
+    <div class='col-2'>
+        <a href="{{ product.icon.url }}"><img src="{{ product.icon.url }}" class="img-fluid" /></a>
+    </div>
+
+    <div class='col-10'>
+        <a href="{{ product.url }}">
+            <h1>{{product.title}}</h1>
+        </a>
+    </div>
+</div>
+
+<br>
+<div class='row'>
+    <div class='col-8'>
+        <a href="{{ product.image.url }}"><img src="{{ product.image.url }}" class="img-fluid" /></a>
+    </div>
+
+    <div class='col-4' id="like-section">
+        {% include 'like.html' %}
+        <a href="{% url 'add' product.id %}"><button class="btn btn-sm " style="background:rgb(151, 0, 151);color:white"><i class="fa fa-shopping-cart"></i> Add to Cart</button></a></center>
+    </div>
+</div>
+
+<br>
+<div class='row'>
+    <div class='col-4'>
+        <h4><i class="fa fa-search" style="color:red"></i> Hunted by : {{product.hunter.username}}</h4>
+    </div>
+
+    <div class='col-4 text-right'>
+        <h4><i class="fa fa-clock-o" style="color:red"></i> {{product.pub_date_pretty}}</h4>
+    </div>
+</div>
+
+<br>
+<div class='row'>
+    <div class='col-8'>
+        <p>{{product.body}}</p>
+    </div>
+</div>
+
+
+{% endblock content %}

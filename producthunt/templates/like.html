@@ -1,0 +1,16 @@
+<center>
+
+    <form class="btn_form" action="{% url 'response' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value={{product.id}} />
+        <input type="hidden" name="choice" value='like' />
+        <button type='submit' value={{product.id}} class="btn btn-primary btn-lg like_btn_{{choices|lookup:product.id}} like_btn"><i class="fa fa-caret-up"></i> Likes {{product.likes}}</button>
+    </form>
+    <form class="btn_form" action="{% url 'response' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value={{product.id}} />
+        <input type="hidden" name="choice" value='dislike' />
+        <button type='submit' value={{product.id}} class="btn btn-lg dislike_btn_{{choices|lookup:product.id}} dislike_btn" style="background:red;color:white"><i class="fa fa-caret-down"></i> Dislikes {{product.dislikes}}</button>
+    </form>
+
+    <br><br>

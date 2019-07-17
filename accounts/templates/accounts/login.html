@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>Login</h1>
+{{error}}
+<br />
+
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %} Username:
+    <br />
+    <input type="text" name="username" />
+    <br />
+    <br /> Password:
+    <br />
+    <input type="password" name="password" />
+    <br />
+    <br /> {% if request.GET.next %}
+    <input type="hidden" name="next" value="{{request.GET.next}}" /> {% endif %}
+    <input class="btn btn-primary" type="submit" value="Login!">
+    <br />
+</form>
+<br />
+<center><a href="{% url 'social:begin' 'google-oauth2' %}">Login with GOOGLE</a>
+    <br />
+    <a href="{% url 'social:begin' 'facebook' %}">Login with FACEBOOK</a>
+</center>
+{% endblock content %}

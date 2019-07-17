@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %} {% for product in products %}
+
+<div class='row pt-3' onclick="window.location='{% url 'detail' product.id %}'" style="cursor:pointer">
+    <div class='col-2'>
+        <img src="{{ product.icon.url }}" class="img-fluid" />
+    </div>
+
+    <div class='col-6'>
+        <h2>{{product.stitle}}</h2>
+        <p> {{product.summary}} </p>
+    </div>
+
+    <div class='col-4'>
+        <a href="javascript:{document.getElementById('remove{{ product.id }}').submit()}"><button class="btn btn-primary btn-lg btn-block" style="background-color:grey;color:blue"><i class="fa fa-close" style="color:red"></i> Remove</button></a>
+        <br>
+        <center>
+            <font color='green'>Likes : {{product.likes}}</font> &emsp;&emsp;&emsp;
+            <font color='red'>Dislikes : {{product.dislikes}}</font>
+        </center>
+    </div>
+</div>
+
+<br>
+<form action="{% url 'remove' product.id %}" method="post" id='remove{{ product.id }}'>
+    {% csrf_token %}
+</form>
+
+{% endfor %} {% endblock content %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>Sign Up</h1>
+{{error}}
+<br />
+
+<form action="{% url 'signup' %}" method="POST">
+    {% csrf_token %} Username:
+    <br />
+    <input type="text" name="username" />
+    <br />
+    <br /> Password:
+    <br />
+    <input type="password" name="password1" />
+    <br />
+    <br /> Confirm Password:
+    <br />
+    <input type="password" name="password2" />
+    <br />
+    <br />
+    <input class="btn btn-primary" type="submit" value="SignUp!">
+    <br />
+</form>
+
+<br />
+<center><a href="{% url 'social:begin' 'google-oauth2' %}">Login with GOOGLE</a>
+    <br />
+    <a href="{% url 'social:begin' 'facebook' %}">Login with FACEBOOK</a>
+</center>
+
+
+{% endblock content %}

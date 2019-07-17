@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block content %} {% for product in products %}
+
+<div class='row pt-3' style="cursor:pointer">
+    <div class='col-2'>
+        <a href="{{product.icon.url}}"><img src="{{ product.icon.url }}" class="img-fluid" /></a>
+    </div>
+
+    <div class='col-6' onclick="window.location='{% url 'detail' product.id %}'">
+        <h2>{{product.stitle}}</h2>
+        <p> {{product.summary}} </p>
+    </div>
+
+    <div class='col-4' class="like-section">
+        {% include 'like.html' %}
+
+        <a href="{% url 'add' product.id %}"><button class="btn btn-sm " style="background:rgb(151, 0, 151);color:white"><i class="fa fa-shopping-cart"></i> Add to Cart</button></a></center>
+    </div>
+</div>
+
+<br> {% endfor %} {% endblock content %}
