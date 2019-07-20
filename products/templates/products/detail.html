@@ -20,9 +20,13 @@
         <a href="{{ product.image.url }}"><img src="{{ product.image.url }}" class="img-fluid" /></a>
     </div>
 
-    <div class='col-4' id="like-section">
-        {% include 'like.html' %}
-        <a href="{% url 'add' product.id %}"><button class="btn btn-sm " style="background:rgb(151, 0, 151);color:white"><i class="fa fa-shopping-cart"></i> Add to Cart</button></a></center>
+    <div class='col-4'>
+        <div class="like-section" name='{{product.id}}'>
+            {% include 'like.html' %}
+
+        </div>
+        <center>
+            <a href="{% url 'add' product.id %}"><button class="btn btn-sm " style="background:rgb(151, 0, 151);color:white"><i class="fa fa-shopping-cart"></i> Add to Cart</button></a></center>
     </div>
 </div>
 

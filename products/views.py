@@ -63,7 +63,6 @@ def detail(request, product_id):
 def response(request):
     product_id = request.POST.get('id')
     choice = request.POST.get('choice')
-    print(choice,product_id)
     product = get_object_or_404(Product, pk = product_id)
     try:
         res = Response.objects.get(lproduct=product,user=request.user)
@@ -75,23 +74,21 @@ def response(request):
     except:
         Response.objects.create(user=request.user,lproduct=product,choice=choice)
     finally:
-        if choice=='like':
-            product.likes = len(Response.objects.filter(lproduct=product,choice='like'))
-        else:
-            product.dislikes = len(Response.objects.filter(lproduct=product,choice='dislike'))
+        product.likes = len(Response.objects.filter(lproduct=product,choice='like'))
+        product.dislikes = len(Response.objects.filter(lproduct=product,choice='dislike'))
         product.save()
     #return redirect('/products/' + str(product.id))
     # return redirect('/')
+   
     choices={}
     try:
         res=Response.objects.get(lproduct=product,user=request.user).choice
     except:
-        res='none'
+            res='none'
     choices.update({product.id:res})
-    print(request.is_ajax())
     if request.is_ajax():
         html = render_to_string('like.html',{'product':product,'choices':choices},request=request)
-        return JsonResponse({'res':html})
+        return JsonResponse({'form':html})
 
 @login_required
 def manage(request):
@@ -106,17 +103,3 @@ def remove(request,product_id):
             obj.delete()
     finally:
         return redirect('manage')
-
-
-
-
-
-
-
-
-
-
-# <button class="btn btn-primary btn-lg like_btn" onclick="javascript:{document.getElementById('like{{ product.id }}').submit()}"><i class="fa fa-caret-up"></i> Likes {{product.likes}}</button>
-
-
-# <button onclick="javascript:{document.getElementById('like').submit()}" class="btn btn-primary btn-lg like_btn"><i class="fa fa-caret-up"></i> Likes {{product.likes}}</button>
